@@ -1,0 +1,40 @@
+{
+  "name": "require",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp",
+    "report-coverage": "codecov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huqi1980/require.git"
+  },
+  "keywords": [
+    "require",
+    "require_js",
+    "require_css",
+    "require_html"
+  ],
+  "author": "Tommy,huqi1980",
+  "license": "MIT",
+  "devDependencies": {
+    "codecov": "^3.1.0",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-changed": "^3.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-fn": "0.0.3",
+    "gulp-footer": "^2.0.2",
+    "gulp-header": "^2.0.7",
+    "gulp-rename": "^1.4.0",
+    "gulp-uglify": "^3.0.1",
+    "karma": "^3.1.4",
+    "karma-coverage": "^1.1.2",
+    "karma-html2js-preprocessor": "^1.1.0",
+    "karma-jasmine": "^2.0.1",
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-chrome-launcher": "^2.2.0"
+  }
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../require.js"></script>
+    <script>
+        function test_loadJs(){
+            require.js("test.js", function(){
+                alert(text);
+            });
+        }
+        function test_loadCss(){
+            require.css("test.css", {"dom": document.body.firstChild.nextSibling}, function(){
+                alert("hello css");
+            });
+        }
+        function test_loadHtml(){
+            require.html("test.html", {"dom": document.body.firstChild.nextSibling}, function(){
+                alert("hello html");
+            });
+        }
+        function test_loadCss_dom(){
+            document.body.firstChild.nextSibling.loadCss("test.css");
+        }
+        function test_loadHtml_dom(){
+            document.body.firstChild.nextSibling.loadHtml("test.html");
+        }
+        function test_loadAll(){
+            require({
+                "html": "test.html",
+                "css": "test.css",
+                "js": "test.js"
+            }, function(){
+                alert("hello all. "+text);
+            });
+        }
+    </script>
+</head>
+<body>
+<div>
+    <div></div>
+    <p></p>
+</div>
+<input type="button" value="test_loadJs" onclick="test_loadJs()"/>
+<input type="button" value="test_loadCss" onclick="test_loadCss()"/>
+<input type="button" value="test_loadHtml" onclick="test_loadHtml()"/>
+<br/>
+<input type="button" value="test_loadCss_dom" onclick="test_loadCss_dom()"/>
+<input type="button" value="test_loadHtml_dom" onclick="test_loadHtml_dom()"/>
+<br/>
+<input type="button" value="test_loadAll" onclick="test_loadAll()"/>
+</body>
+</html>
