@@ -4,7 +4,8 @@ module.exports = function(config) {
         frameworks: ['jasmine'],
         files: [
             'dest/require.js',
-            'test/**/*.spec.js'
+            'test/**/*.spec.js',
+            {pattern: 'dest/demo/*', included: false}
         ],
         exclude: [
         ],
@@ -28,9 +29,10 @@ module.exports = function(config) {
         coverageReporter: {
             dir: 'coverage',
             reporters: [
+                {type: 'cobertura', subdir: '.'},
                 {type:'lcovonly', subdir: '.'},
                 // {type:'json', subdir: 'json'},
-                // {type:'html',subdir : 'html'}
+                 {type:'html',subdir : 'html'}
             ]
         },
 
@@ -39,6 +41,15 @@ module.exports = function(config) {
         logLevel: config.LOG_INFO,
         autoWatch: false,
         browsers: ['PhantomJS'],
+        //browsers: ['Chrome'],
+        plugins: [
+            'karma-jasmine',
+            'karma-coverage',
+            'karma-phantomjs-launcher',
+            'karma-html2js-preprocessor',
+            'karma-chrome-launcher'
+        ],
+
         //browsers: ['Chrome'],
         singleRun: true,
         concurrency: Infinity
