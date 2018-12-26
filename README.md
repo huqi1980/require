@@ -12,8 +12,9 @@ require
 
 **Examples**
 
-	grunt compat             # or
-	grunt packager:compat    # to only build the source
+	gulp                # or
+	gulp build          # to only build the source
+	gulp demo           # to only build the demo
 
 ## API
 
