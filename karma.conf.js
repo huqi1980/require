@@ -5,7 +5,7 @@ module.exports = function(config) {
         files: [
             'dest/require.js',
             'test/**/*.spec.js',
-            {pattern: 'dest/demo/*', included: false}
+            {pattern: 'test/res/*', included: false}
         ],
         exclude: [
         ],

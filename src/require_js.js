@@ -62,3 +62,7 @@ var _load = function(modules, options, callback){
     }
 };
 require.js = _load;
+require.js.clear = function(){
+    _loaded = null;
+    _loaded = {};
+};

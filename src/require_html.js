@@ -54,3 +54,7 @@ Element.prototype.loadHtml = function(modules, options, callback){
     op.dom = this;
     _loadHtml(modules, op, cb);
 };
+require.html.clear = function(){
+    _loadedHtml = null;
+    _loadedHtml = {};
+};
