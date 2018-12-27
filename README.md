@@ -1,4 +1,4 @@
-# require
+# require #
 
 require is a library for asynchronous reference to Javascript, html, css.
 
@@ -12,7 +12,7 @@ require is a library for asynchronous reference to Javascript, html, css.
 
 ---
 
-## Building & Testing
+## Building & Testing ##
 
 Current build process uses Gulp, and Karma related repos.
 
@@ -28,7 +28,7 @@ Current build process uses Gulp, and Karma related repos.
 
 	$ npm run test
 
-## Sample
+## Sample ##
 
 add "script" tag in your html file:
 
@@ -37,43 +37,86 @@ add "script" tag in your html file:
 ```
 
 require a javascript modue:
+
 ```js
-	require.js("jquery.js", function(modules){
-	    //your code
-	});
+require.js("jquery.js", function(modules){
+    //your code
+});
 ```
 
 require a css modue:
+
 ```js
-	//load css for document
-	require.css("style.css", function(styles){
-	    //your code
-	});
+//load css for document
+require.css("style.css", function(styles){
+    //your code
+});
 
-	//load css for dom
-	require.css("style.css", {dom, $("content")}, function(styles){
-	    //your code
-	});
+//load css for dom
+require.css("style.css", {dom, $("content")}, function(styles){
+    //your code
+});
 
-	//load css with dom
-	node.loadCss("style.css", function(styles){
-	    //your code
-	});
+//load css with dom
+node.loadCss("style.css", function(styles){
+    //your code
+});
 ```
+
 remove a css modue:
+
 ```js
-	require.css.remove("style.css");
+require.css.remove("style.css");
 ```
 
 require a html modue:
-```js
-	//load html for dom
-	require.css("list.html", {dom, $("content")}, function(htmls){
-	    //your code
-	});
 
-	//load html with dom
-	node.loadHtml("list.html", function(htmls){
-	    //your code
-	});
+```js
+//load html for dom
+require.css("list.html", {dom, $("content")}, function(htmls){
+    //your code
+});
+
+//load html with dom
+node.loadHtml("list.html", function(htmls){
+    //your code
+});
 ```
+
+require js,html,css modue:
+
+```js
+require({
+    "html": "test.html",
+    "css": "test.css",
+    "js": "test.js"
+}, function(htmls, styles, modules){
+    //your code
+});
+```
+## API ##
+
+###require.js(modules, [options, callback])###
+
+require one or more javascript files.
+
+**parameters**
+
+*modules*：`string` or `array` the javascript path
+
+*options*: `object`
+> *noCache*: `boolean` default is `false`
+> *reload*: `boolean` default is `false`
+> *doc*: `HTMLDocument` default is `document`
+
+*callback*: `function` this Callback function, Receives the modules object as arguments.
+
+
+
+###require.css(modules, [options, callback])###
+
+###require.css.remove(modules, [options, callback])###
+
+###require.html(modules, [options, callback])###
+
+###require(modules, [options, callback])###
