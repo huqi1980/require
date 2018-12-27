@@ -105,9 +105,13 @@ require one or more javascript files.
 *modules*：`string` or `array` the javascript path
 
 *options*: `object`
-> *noCache*: `boolean` default is `false`
-> *reload*: `boolean` default is `false`
-> *doc*: `HTMLDocument` default is `document`
+
+> *-noCache*: `boolean` default is `false`
+
+> *-reload*: `boolean` default is `false`
+
+> *-doc*: `HTMLDocument` default is `document`
+
 
 *callback*: `function` this Callback function, Receives the modules object as arguments.
 
