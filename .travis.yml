@@ -11,7 +11,5 @@ before_script:
 script:
   - gulp
   - npm run test
-
-after_success:
   - npm run report-coverage
 
