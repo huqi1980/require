@@ -1,4 +1,4 @@
-# require #
+# require
 
 require is a library for asynchronous reference to Javascript, html, css.
 
@@ -12,7 +12,7 @@ require is a library for asynchronous reference to Javascript, html, css.
 
 ---
 
-# Building & Testing #
+# Building & Testing
 
 Current build process uses Gulp, and Karma related repos.
 
@@ -28,7 +28,7 @@ Current build process uses Gulp, and Karma related repos.
 
 	$ npm run test
 
-# Sample #
+# Sample
 
 add "script" tag in your html file:
 
@@ -96,7 +96,7 @@ require({
 ```
 # API #
 
-##require.js(modules, [options, callback])##
+##require.js(modules, [options, callback])
 
 require one or more javascript files.
 
@@ -131,7 +131,7 @@ require.js(["code1.js", "code2.js"], {"noCache": true}, function(modules){
 });
 ```
 
-##require.css(modules, [options, callback])##
+##require.css(modules, [options, callback])
 
 require one or more css files.
 
@@ -175,7 +175,7 @@ document.getElementById("id").loadCss(["style1.css", "style2.css"], function(){
 });
 ```
 
-##require.css.remove(modules)##
+##require.css.remove(modules)
 
 remove a css (required by "require.css") from document
 
@@ -183,7 +183,7 @@ remove a css (required by "require.css") from document
 
 ***module***：`string` the css path, same as require.css; or thie css module uuid (received in the callback function when require.css).
 
-##require.html(modules, [options, callback])##
+##require.html(modules, [options, callback])
 
 require one or more html files.
 
@@ -228,7 +228,7 @@ document.getElementById("id").loadHtml(["tp1.html", "tp2.html"], function(){
 });
 ```
 
-##require(modules, [options, callback])##
+##require(modules, [options, callback])
 
 require one or more html, css, javascript files.
 
@@ -250,9 +250,9 @@ require one or more html, css, javascript files.
 > *-htmls*: see require.html callback
 
 > *-styles*: see require.css callback
->
+
 > *-modules*: see require.js callback
 
-# License #
+# License
 
 [MIT License](https://en.wikipedia.org/wiki/MIT_License)
