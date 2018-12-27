@@ -3,14 +3,14 @@ module.exports = function(config) {
         basePath: '',
         frameworks: ['jasmine'],
         files: [
-            'dest/require.js',
+            'src/*.js',
             'test/**/*.spec.js',
             {pattern: 'test/res/*', included: false}
         ],
         exclude: [
         ],
         preprocessors: {
-            'dest/require.js': ['coverage']
+            'src/*.js': ['coverage']
         },
 
         reporters: ['progress', 'coverage'],
@@ -18,7 +18,6 @@ module.exports = function(config) {
         coverageReporter: {
             dir: 'coverage',
             reporters: [
-                {type: 'cobertura', subdir: 'cobertura'},
                 {type:'lcovonly', subdir: 'lcovonly'},
                 {type:'json', subdir: 'json'},
                 {type:'html',subdir : 'html'}
