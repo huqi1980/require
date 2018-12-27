@@ -10,29 +10,18 @@ module.exports = function(config) {
         exclude: [
         ],
         preprocessors: {
-            'dest/require.js': ['coverage'],
-            'dest/demo/index.html': ['html2js']
+            'dest/require.js': ['coverage']
         },
 
         reporters: ['progress', 'coverage'],
-
-        html2JsPreprocessor: {
-            // stripPrefix: 'public/',
-            // prependPrefix: 'served/',
-            processPath: function(filePath) {
-                var p = filePath.replace(/\.html$/, '');
-                p = p.replace(/\\/g, '-');
-                return p.replace(/\//g, '-');
-            }
-        },
 
         coverageReporter: {
             dir: 'coverage',
             reporters: [
                 {type: 'cobertura', subdir: '.'},
                 {type:'lcovonly', subdir: '.'},
-                // {type:'json', subdir: 'json'},
-                 {type:'html',subdir : 'html'}
+                {type:'json', subdir: 'json'},
+                {type:'html',subdir : 'html'}
             ]
         },
 
@@ -46,7 +35,6 @@ module.exports = function(config) {
             'karma-jasmine',
             'karma-coverage',
             'karma-phantomjs-launcher',
-            'karma-html2js-preprocessor',
             'karma-chrome-launcher'
         ],
 

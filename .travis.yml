@@ -13,4 +13,7 @@ before_script:
 script:
   - gulp
   - karma start
+
+after_success:
   - npm run report-coverage
+
