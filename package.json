@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "gulp",
+    "test": "karma start",
     "report-coverage": "codecov -t e497c992-5df5-4f12-adcb-21f89a6474d3"
   },
   "repository": {
