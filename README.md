@@ -96,6 +96,8 @@ require({
 ```
 # API #
 
+s
+
 ##require.js(modules, [options, callback])
 
 require one or more javascript files.
