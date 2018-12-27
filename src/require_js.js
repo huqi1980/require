@@ -21,7 +21,7 @@ var _loadSingle = function(module, callback, op){
 
     var _checkScriptLoaded = function(_, isAbort, err){
         if (isAbort || !s.readyState || s.readyState === "loaded" || s.readyState === "complete") {
-            var scriptObj = {"module": "module", "id": uuid, "script": s, "doc": op.doc};
+            var scriptObj = {"module": module, "id": uuid, "script": s, "doc": op.doc};
             if (!err) _loaded[key] = scriptObj;
             _removeListener(s, 'readystatechange', _checkScriptLoaded);
             _removeListener(s, 'load', _checkScriptLoaded);

@@ -102,21 +102,157 @@ require one or more javascript files.
 
 **parameters**
 
-*modules*：`string` or `array` the javascript path
+***modules***：`string` or `array` the javascript path
 
-*options*: `object`
-> *noCache*: `boolean` default is `false`
-> *reload*: `boolean` default is `false`
-> *doc*: `HTMLDocument` default is `document`
+***options***: `object`
 
-*callback*: `function` this Callback function, Receives the modules object as arguments.
+> *-noCache*: `boolean` default is `false`
+
+> *-reload*: `boolean` default is `false`
+
+> *-doc*: `HTMLDocument` default is `document`
 
 
+***callback***: `function` this Callback function, Receives the modules array as arguments.
+
+> *-modules[i].module*: this javascript path
+
+> *-modules[i].id*: a uuid for this module
+
+**example**
+
+```js
+require.js("jquery.js", function(modules){
+    //your code
+});
+
+require.js(["code1.js", "code2.js"], {"noCache": true}, function(modules){
+    //your code
+});
+```
 
 ###require.css(modules, [options, callback])###
 
-###require.css.remove(modules, [options, callback])###
+require one or more css files.
+
+**parameters**
+
+***modules***：`string` or `array` the css path
+
+***options***: `object`
+
+> *-noCache*: `boolean` default is `false`
+
+> *-reload*: `boolean` default is `false`
+
+> *-dom*: `HTMLElement`or `string` or `array` default is `null`, this value can be HTMLElement or css selector. If this value is supplied, css will take effect on this dom object.
+
+> *-doc*: `HTMLDocument` default is `document`
+
+
+***callback***: `function` this Callback function, Receives the modules array as arguments.
+
+> *-modules[i].module*: this css path
+
+> *-modules[i].id*: a uuid for this css module
+
+> *-modules[i].style*: a HTMLStyleElement
+
+**example**
+
+```js
+require.css("style.css", function(modules){
+    //your code
+});
+
+require.css(["style1.css", "style2.css"], {"dom": [".content", ".list", document.getElementById("id")]}, function(modules){
+    //your code
+});
+
+
+document.getElementById("id").loadCss(["style1.css", "style2.css"], function(){
+	//your code
+});
+```
+
+###require.css.remove(modules)###
+
+remove a css (required by "require.css") from document
+
+**parameters**
+
+***module***：`string` the css path, same as require.css; or thie css module uuid (received in the callback function when require.css).
 
 ###require.html(modules, [options, callback])###
 
+require one or more html files.
+
+**parameters**
+
+***modules***：`string` or `array` the html path
+
+***options***: `object`
+
+> *-noCache*: `boolean` default is `false`
+
+> *-reload*: `boolean` default is `false`
+
+> *-dom*: `HTMLElement`or `string` or `array` default is `null`, this value can be HTMLElement or css selector. If this value is supplied, Html content will be append to these doms
+
+> *-doc*: `HTMLDocument` default is `document`
+
+> *-position*: `string` default is `beforeend`. where this html appended. this value can be `beforebegin` `afterbegin` `beforeend` `afterend`
+
+
+***callback***: `function` this Callback function, Receives the modules array as arguments.
+
+> *-modules[i].module*: this html path
+
+> *-modules[i].id*: a uuid for this html module
+
+> *-modules[i].data*: thie html text
+
+**example**
+
+```js
+require.html("tp.html", function(modules){
+    //your code
+});
+
+require.html(["tp1.html", "tp1.html"], {"dom": [".content", ".list", document.getElementById("id")]}, function(modules){
+    //your code
+});
+
+document.getElementById("id").loadHtml(["tp1.html", "tp2.html"], function(){
+	//your code
+});
+```
+
 ###require(modules, [options, callback])###
+
+require one or more html, css, javascript files.
+
+**parameters**
+
+***modules***：`object` the html, css, javascript path.
+
+> *-html*: `string` or `array` the html path, like require.html modules
+
+> *-css*: `string` or `array` the css path, like require.css modules
+
+> *-js*: `string` or `array` the javascript path, like require.js modules
+
+
+***options***: `object` see require.html options
+
+***callback***: `function` this Callback function, Receives the htmls array, styles array and modules array as arguments.
+
+> *-htmls*: see require.html callback
+
+> *-styles*: see require.css callback
+>
+> *-modules*: see require.js callback
+
+## License ##
+
+[MIT License](https://en.wikipedia.org/wiki/MIT_License)
