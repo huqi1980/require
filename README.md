@@ -111,6 +111,8 @@ require one or more javascript files.
 
 > *-reload*: `boolean` default is `false`
 
+> *-sequence*: `boolean` default is `false`. if this value is `true` and modules is `array`,  they will load in order, otherwise the load order is not guaranteed.
+
 > *-doc*: `HTMLDocument` default is `document`
 
 
@@ -148,6 +150,8 @@ require one or more css files.
 > *-noCache*: `boolean` default is `false`
 
 > *-reload*: `boolean` default is `false`
+
+> *-sequence*: `boolean` default is `false`. if this value is `true` and modules is `array`,  they will load in order, otherwise the load order is not guaranteed.
 
 > *-dom*: `HTMLElement`or `string` or `array` default is `null`, this value can be HTMLElement or css selector. If this value is supplied, css will take effect on this dom object.
 
@@ -204,6 +208,8 @@ require one or more html files.
 > *-noCache*: `boolean` default is `false`
 
 > *-reload*: `boolean` default is `false`
+
+> *-sequence*: `boolean` default is `false`. if this value is `true` and modules is `array`,  they will load in order, otherwise the load order is not guaranteed.
 
 > *-dom*: `HTMLElement`or `string` or `array` default is `null`, this value can be HTMLElement or css selector. If this value is supplied, Html content will be append to these doms
 
