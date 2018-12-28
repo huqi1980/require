@@ -13,6 +13,14 @@ describe('require_js: ', function() {
         });
     });
 
+    it('Load Javascript default', function(done) {
+        require.js(["/base/test/res/test.js", "/base/test/res/test2.js"], function(s){
+            done();
+            expect(s.length).toBeGreaterThan(0);
+            expect(text2).toEqual('my name is test2.js');
+        });
+    });
+
     it('Load Javascript error', function(done) {
         require.js("/base/test/res/test1.js", function(s){
             done();

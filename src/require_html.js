@@ -4,6 +4,7 @@ var _getHtmlOptions = function(options){
     return {
         "noCache": !!(options && options.nocache),
         "reload": !!(options && options.reload),
+        "sequence": !!(options && options.sequence),
         "doc": (options && options.doc) || document,
         "dom": (options && options.dom) || null,
         "position": "beforeend" //'beforebegin' 'afterbegin' 'beforeend' 'afterend'
@@ -28,23 +29,32 @@ _loadSingleHtml = function(module, callback, op){
     _xhr_get(url, success, failure);
 };
 
+var _injectHtml = function(op, data){
+    if (op.dom) _parseDom(op.dom, function(node){ node.insertAdjacentHTML(op.position, data) }, op.doc);
+};
 var _loadHtml = function(modules, options, callback){
     var ms = (_typeOf(modules)==="array") ? modules : [modules];
     var op =  (_typeOf(options)==="object") ? _getHtmlOptions(options) : _getHtmlOptions(null);
     var cb = (_typeOf(options)==="function") ? options : callback;
 
-    var count = 0;
+    //var count = 0;
     var thisLoaded = [];
-    for (var i=0; i<ms.length; i++){
-        _loadSingleHtml(ms[i], function(html){
-            if (html){
-                thisLoaded.push(html);
-                if (op.dom) _parseDom(op.dom, function(node){ node.insertAdjacentHTML(op.position, html.data) }, op.doc);
-            }
-            count++;
-            if (count===ms.length) if (cb) cb(thisLoaded);
-        }, op);
+    if (op.sequence){
+        _loadSequence(ms, cb, op, 0, thisLoaded, _loadSingleHtml, null, function(html){ if (html) _injectHtml(op, html.data ); });
+    }else{
+        _loadDisarray(ms, cb, op, thisLoaded, _loadSingleHtml, null, function(html){ if (html) _injectHtml(op, html.data ); });
     }
+
+    // for (var i=0; i<ms.length; i++){
+    //     _loadSingleHtml(ms[i], function(html){
+    //         if (html){
+    //             thisLoaded.push(html);
+    //             if (op.dom) _parseDom(op.dom, function(node){ node.insertAdjacentHTML(op.position, html.data) }, op.doc);
+    //         }
+    //         count++;
+    //         if (count===ms.length) if (cb) cb(thisLoaded);
+    //     }, op);
+    // }
 };
 require.html = _loadHtml;
 

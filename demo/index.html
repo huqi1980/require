@@ -6,8 +6,8 @@
     <script src="../require.js"></script>
     <script>
         function test_loadJs(){
-            require.js("test.js", function(){
-                alert(text);
+            require.js(["test.js", "test2.js"], {"sequence": true}, function(){
+                alert(text+text2);
             });
         }
         function test_loadCss(){

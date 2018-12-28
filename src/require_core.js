@@ -29,6 +29,7 @@ var _getAllOptions = function(options){
     return {
         "noCache": !!(options && options.nocache),
         "reload": !!(options && options.reload),
+        "sequence": !!(options && options.sequence),
         "doc": (options && options.doc) || document,
         "dom": (options && options.dom) || document.body,
         "position": "beforeend" //'beforebegin' 'afterbegin' 'beforeend' 'afterend'
@@ -179,3 +180,27 @@ var _xhr_get = function(url, success, failure){
     _addListener(xhr, "readystatechange", _checkCssLoaded);
     xhr.send();
 }
+
+var _loadSequence = function(ms, cb, op, n, thisLoaded, loadSingle, uuid, fun){
+    loadSingle(ms[n], function(module){
+        if (module) thisLoaded.push(module);
+        n++;
+        if (fun) fun(module);
+        if (n===ms.length){
+            if (cb) cb(thisLoaded);
+        }else{
+            _loadSequence(ms, cb, op, n, thisLoaded, loadSingle, uuid, fun);
+        }
+    }, op, uuid);
+};
+var _loadDisarray = function(ms, cb, op, thisLoaded, loadSingle, uuid, fun){
+    var count=0;
+    for (var i=0; i<ms.length; i++){
+        loadSingle(ms[i], function(module){
+            if (module) thisLoaded.push(module);
+            count++;
+            if (fun) fun(module);
+            if (count===ms.length) if (cb) cb(thisLoaded);
+        }, op, uuid);
+    }
+};

@@ -3,6 +3,7 @@ var _getJsOptions = function(options){
     return {
         "noCache": !!(options && options.nocache),
         "reload": !!(options && options.reload),
+        "sequence": !!(options && options.sequence),
         "doc": (options && options.doc) || document
     }
 };
@@ -46,19 +47,17 @@ var _loadSingle = function(module, callback, op){
     _addListener(s, 'load', _checkScriptLoaded);
     _addListener(s, 'error', _checkScriptErrorLoaded);
 };
+
 var _load = function(modules, options, callback){
     var ms = (_typeOf(modules)==="array") ? modules : [modules];
     var op =  (_typeOf(options)==="object") ? _getJsOptions(options) : _getJsOptions(null);
     var cb = (_typeOf(options)==="function") ? options : callback;
 
-    var count=0;
     var thisLoaded = [];
-    for (var i=0; i<ms.length; i++){
-        _loadSingle(ms[i], function(script){
-            if (script) thisLoaded.push(script);
-            count++;
-            if (count===ms.length) if (cb) cb(thisLoaded);
-        }, op);
+    if (op.sequence){
+        _loadSequence(ms, cb, op, 0, thisLoaded, _loadSingle);
+    }else{
+        _loadDisarray(ms, cb, op, thisLoaded, _loadSingle);
     }
 };
 require.js = _load;
