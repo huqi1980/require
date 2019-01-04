@@ -185,13 +185,15 @@ document.getElementById("id").loadCss(["style1.css", "style2.css"], function(){
 
 ----------
 
-**◆ require.css.remove(modules)**
+**◆ require.css.remove(modules, [doc])**
 
 remove a css (required by "require.css") from document
 
 **parameters**
 
 ***module***：`string` the css path, same as require.css; or thie css module uuid (received in the callback function when require.css).
+
+***doc***：`HTMLDocument` default is `document`.
 
 ----------
 
