@@ -95,8 +95,9 @@ var _loadCss = function(modules, options, callback){
         _loadDisarray(ms, cb, op, thisLoaded, _loadSingleCss, uuid);
     }
 };
-var _remove = function(module){
-    var k = encodeURIComponent(module);
+var _remove = function(module, doc){
+    var thisDoc = doc || document;
+    var k = encodeURIComponent(module+(thisDoc.unid||""));
     var removeCss = _loadedCss[k];
     if (!removeCss) for (key in _loadedCss){
         if (_loadedCss[key].id==module){
