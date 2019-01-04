@@ -1,5 +1,7 @@
 var _loaded = {};
 var _getJsOptions = function(options){
+    var doc = (options && options.doc) || document;
+    if (!doc.unid) doc.unid = _uuid();
     return {
         "noCache": !!(options && options.nocache),
         "reload": !!(options && options.reload),
@@ -11,7 +13,7 @@ var _loadSingle = function(module, callback, op){
     var url = module;
     var uuid = _uuid();
     if (op.noCache) url = (url.indexOf("?")!==-1) ? url+"&v="+uuid : addr_uri+"?v="+uuid;
-    var key = encodeURIComponent(url);
+    var key = encodeURIComponent(url+op.doc.unid);
     if (!op.reload) if (_loaded[key]){ if (callback)callback(); return; }
 
     var head = (op.doc.head || op.doc.getElementsByTagName("head")[0] || op.doc.documentElement);

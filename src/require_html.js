@@ -1,6 +1,8 @@
 var _loadedHtml = {};
 
 var _getHtmlOptions = function(options){
+    var doc = (options && options.doc) || document;
+    if (!doc.unid) doc.unid = _uuid();
     return {
         "noCache": !!(options && options.nocache),
         "reload": !!(options && options.reload),
@@ -14,7 +16,7 @@ _loadSingleHtml = function(module, callback, op){
     var url = module;
     var uid = _uuid();
     if (op.noCache) url = (url.indexOf("?")!==-1) ? url+"&v="+uid : url+"?v="+uid;
-    var key = encodeURIComponent(url);
+    var key = encodeURIComponent(url+op.doc.unid);
     if (!op.reload) if (_loadedHtml[key]){ if (callback)callback(_loadedHtml[key]); return; }
 
     var success = function(xhr){

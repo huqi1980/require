@@ -1,5 +1,7 @@
 var _loadedCss = {};
 var _getCssOptions = function(options){
+    var doc = (options && options.doc) || document;
+    if (!doc.unid) doc.unid = _uuid();
     return {
         "noCache": !!(options && options.nocache),
         "reload": !!(options && options.reload),
@@ -13,7 +15,7 @@ var _loadSingleCss = function(module, callback, op, uuid){
     var uid = _uuid();
     if (op.noCache) url = (url.indexOf("?")!==-1) ? url+"&v="+uid : url+"?v="+uid;
 
-    var key = encodeURIComponent(url);
+    var key = encodeURIComponent(url+op.doc.unid);
     if (!op.reload) if (_loadedCss[key]){ if (callback)callback(_loadedCss[key]); return; }
 
     var success = function(xhr){
@@ -86,20 +88,12 @@ var _loadCss = function(modules, options, callback){
     var uuid = "css"+_uuid();
     if (op.dom) _parseDom(op.dom, function(node){ node.className += ((node.className) ? " "+uuid : uuid)}, op.doc);
 
-    //var count = 0;
     var thisLoaded = [];
     if (op.sequence){
         _loadSequence(ms, cb, op, 0, thisLoaded, _loadSingleCss, uuid);
     }else{
         _loadDisarray(ms, cb, op, thisLoaded, _loadSingleCss, uuid);
     }
-    // for (var i=0; i<ms.length; i++){
-    //     _loadSingleCss(ms[i], function(style){
-    //         if (style) thisLoaded.push(style);
-    //         count++;
-    //         if (count===ms.length) if (cb) cb(thisLoaded);
-    //     }, uuid, op);
-    // }
 };
 var _remove = function(module){
     var k = encodeURIComponent(module);

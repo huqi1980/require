@@ -26,6 +26,8 @@
  ****************************************************************************/
 
 var _getAllOptions = function(options){
+    var doc = (options && options.doc) || document;
+    if (!doc.unid) doc.unid = _uuid();
     return {
         "noCache": !!(options && options.nocache),
         "reload": !!(options && options.reload),
