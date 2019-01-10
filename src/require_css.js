@@ -1,4 +1,7 @@
 var _loadedCss = {};
+var _loadCssRunning = {};
+var _loadCssQueue = [];
+
 var _getCssOptions = function(options){
     var doc = (options && options.doc) || document;
     if (!doc.unid) doc.unid = _uuid();
@@ -16,7 +19,31 @@ var _loadSingleCss = function(module, callback, op, uuid){
     if (op.noCache) url = (url.indexOf("?")!==-1) ? url+"&v="+uid : url+"?v="+uid;
 
     var key = encodeURIComponent(url+op.doc.unid);
-    if (!op.reload) if (_loadedCss[key]){ if (callback)callback(_loadedCss[key]); return; }
+    if (_loadCssRunning[key]){
+        _loadCssQueue.push(function(){
+            _loadSingleCss(module, callback, op, uuid);
+        });
+        return;
+    }
+
+    if (_loadedCss[key]) uuid = _loadedCss[key]["class"];
+    if (op.dom) _parseDom(op.dom, function(node){ if (node.className.indexOf(uuid) == -1) node.className += ((node.className) ? " "+uuid : uuid);}, op.doc);
+
+    var completed = function(){
+        if (_loadCssRunning[key]){
+            _loadCssRunning[key] = false;
+            delete _loadCssRunning[key];
+        }
+        if (_loadCssQueue && _loadCssQueue.length){
+            (_loadCssQueue.shift())();
+        }
+    };
+
+    if (_loadedCss[key])if (!op.reload){
+        if (callback)callback(_loadedCss[key]);
+        completed();
+        return;
+    }
 
     var success = function(xhr){
         var cssText = xhr.responseText;
@@ -51,7 +78,7 @@ var _loadSingleCss = function(module, callback, op, uuid){
                 }
             }
             style.id = uid;
-            var styleObj = {"module": module, "id": uid, "style": style, "doc": op.doc};
+            var styleObj = {"module": module, "id": uid, "style": style, "doc": op.doc, "class": uuid};
             _loadedCss[key] = styleObj;
             if (callback) callback(styleObj);
         }catch (e){
@@ -63,6 +90,9 @@ var _loadSingleCss = function(module, callback, op, uuid){
         console.log("Error: load css module: "+module);
         if (callback) callback();
     };
+
+    _loadCssRunning[key] = true;
+
     _xhr_get(url, success, failure);
 };
 
