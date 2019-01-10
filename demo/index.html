@@ -11,9 +11,12 @@
             });
         }
         function test_loadCss(){
-            require.css("test.css", {"dom": document.body.firstChild.nextSibling}, function(){
-                alert("hello css");
-            });
+            for (var i =0; i<5; i++){
+                require.css("test.css", {"dom": document.body.firstChild.nextSibling}, function(){
+                    alert("hello css"+i);
+                });
+            }
+
         }
         function test_loadHtml(){
             require.html("test.html", {"dom": document.body.firstChild.nextSibling}, function(){

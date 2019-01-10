@@ -154,12 +154,16 @@ var _uuid = function(){
     return tl + tm + thv + csar + csl + n;
 };
 
-var _xhr_get = function(url, success, failure){
+var _xhr_get = function(url, success, failure, completed){
     var xhr = new _request();
     xhr.open("GET", url, true);
 
     var _checkCssLoaded= function(_, err){
-        if (!(xhr.readyState == 4 || err)) return;
+        if (!(xhr.readyState == 4)) return;
+        if (err){
+            if (completed) completed(xhr);
+            return;
+        }
 
         _removeListener(xhr, 'readystatechange', _checkCssLoaded);
         _removeListener(xhr, 'load', _checkCssLoaded);
@@ -174,6 +178,7 @@ var _xhr_get = function(url, success, failure){
             failure(xhr);
         else
             failure(xhr);
+        if (completed) completed(xhr);
     };
     var _checkCssErrorLoaded= function(err){ _checkCssLoaded(err) };
 

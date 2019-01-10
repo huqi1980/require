@@ -1,6 +1,6 @@
 describe('require_css: ', function() {
     beforeEach(function(done) {
-        require.css.remove('/base/test/res/test1.css');
+        require.css.remove('/base/test/res/test.css');
         done();
     });
 

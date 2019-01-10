@@ -93,7 +93,7 @@ var _loadSingleCss = function(module, callback, op, uuid){
 
     _loadCssRunning[key] = true;
 
-    _xhr_get(url, success, failure);
+    _xhr_get(url, success, failure, completed);
 };
 
 var _parseDomString = function(dom, fn, sourceDoc){
