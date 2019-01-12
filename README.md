@@ -18,7 +18,7 @@ Current build process uses Gulp, and Karma related repos.
 
 **build**
 
-	$ npm i -g gulp-cli karma-cli codecov
+	$ npm i -g gulp-cli karma-cli
 	$ npm install
 	$ gulp                # or
 	$ gulp build          # to only build the source, or
