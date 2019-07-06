@@ -37,6 +37,7 @@
     "LICENSE",
     "package.json",
     "README.md",
+    "dest/",
     "demo/",
     "test/",
     "src/"
