@@ -1,2 +1,2 @@
-alert("i am js");
+alert("i am js test");
 text = "my name is test.js";
